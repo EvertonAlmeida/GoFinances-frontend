@@ -37,6 +37,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     async function loadTransactions(): Promise<void> {
       const { data: response } = await api.get('/transactions');
+      console.log(response);
       setTransactions(
         response.transactions.map((t: Transaction) => ({
           ...t,
@@ -101,7 +102,7 @@ const Dashboard: React.FC = () => {
                     {transaction.type === 'outcome' && `- `}
                     {transaction.formattedValue}
                   </td>
-                  <td>{transaction.category.title}</td>
+                  <td>{transaction.category?.title}</td>
                   <td>{transaction.formattedDate}</td>
                 </tr>
               ))}
